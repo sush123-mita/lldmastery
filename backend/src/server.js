@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 const apiRoutes = require('./routes/api');
 const Problem = require('./models/Problem');
@@ -10,7 +11,7 @@ const seedProblems = require('./domain/problems/seedData');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/lld_platform';
+const MONGO_URI = process.env.MONGO_URI 
 
 // Middlewares
 app.use(cors({ origin: '*' }));
