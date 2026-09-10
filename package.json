@@ -1,0 +1,11 @@
+{
+  "name": "lld-platform-root",
+  "version": "1.0.0",
+  "description": "Low-Level Design Practice & Explainable Evaluation Platform",
+  "scripts": {
+    "server": "npm --prefix backend start",
+    "server:dev": "npm --prefix backend run dev",
+    "client": "npm --prefix frontend run dev",
+    "seed": "npm --prefix backend run seed"
+  }
+}
