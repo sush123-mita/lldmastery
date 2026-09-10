@@ -2,8 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
+const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
+const envCandidates = [
+  path.resolve(__dirname, '.env'),
+  path.resolve(__dirname, '..', '.env')
+];
+
+for (const envPath of envCandidates) {
+  if (fs.existsSync(envPath)) {
+    require('dotenv').config({ path: envPath });
+    break;
+  }
+}
 
 const apiRoutes = require('./routes/api');
 const Problem = require('./models/Problem');
@@ -11,7 +23,7 @@ const seedProblems = require('./domain/problems/seedData');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI 
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/lld_platform';
 
 // Middlewares
 app.use(cors({ origin: '*' }));
